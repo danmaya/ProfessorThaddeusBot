@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Telegram;
+use Telegram\Bot\Api;
 
 class XatbotController extends Controller
 {
