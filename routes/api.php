@@ -22,8 +22,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('/activity', [XatbotController::class, 'updatedActivity']);
 Route::get('/welcome', [XatbotController::class, 'welcome']);
 
-Route::post('/3ymCKxba9W61ANhx03Ub7i8dOhOEsh4me5j2dOQGhgShGoxjlCivKF3uiUEThxBuZqN9nvM2tPg3UGze/webhook', [
-    XatbotController::class, 'handleRequest'
-]);
+Route::post('/3ymCKxba9W61ANhx03Ub7i8dOhOEsh4me5j2dOQGhgShGoxjlCivKF3uiUEThxBuZqN9nvM2tPg3UGze/webhook', [XatbotController::class, 'handleRequest']);
 
 Route::get('/setwebhook', [XatbotController::class, 'setWebhook']);
