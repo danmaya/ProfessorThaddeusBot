@@ -21,4 +21,10 @@ class XatbotController extends Controller
             'text' => $text
         ]);
     }
+
+    public function setWebhook() {
+        $response = Telegram::setWebhook(['url' => 
+        'https://professorthaddeusbot.herokuapp.com/api/3ymCKxba9W61ANhx03Ub7i8dOhOEsh4me5j2dOQGhgShGoxjlCivKF3uiUEThxBuZqN9nvM2tPg3UGze/webhook']);
+        dd($response);
+    }
 }
