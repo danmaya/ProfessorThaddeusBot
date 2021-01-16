@@ -52,8 +52,8 @@ class XatbotController extends Controller
         $arg = count($instruction) > 1 ? $instruction[1] : "";
 
         switch ($cmd) {
-            case '/help':
-                $this->showHelp();
+            case '/assistance':
+                $this->showAssistance();
                 break;
             case '/compliment':
                 $this->showCompliment();
@@ -61,19 +61,19 @@ class XatbotController extends Controller
             case '/pet':
                 $this->showPet();
                 break;
-            case '/assistance':
-                $this->showAssistance($arg);
+            case '/dice':
+                $this->showDice($arg);
                 break;
             default:
                 break;
         }
     }
 
-    public function showHelp()
+    public function showAssistance()
     {
         $message = "";
 
-        $message .= "May I help you?" . chr(10);
+        $message .= "May I assist you?" . chr(10);
 
         $this->sendMessage($message);
     }
@@ -96,13 +96,33 @@ class XatbotController extends Controller
         $this->sendMessage($message);
     }
 
-    public function showAssistance()
+    public function showDice($type = null)
     {
-        $message = "";
+        switch ($type) {
+            case 'd4':
+                $roll = rand(1, 4);
+                break;
+            case 'd6':
+                $roll = rand(1, 6);
+                break;
+            case 'd8':
+                $roll = rand(1, 8);
+                break;
+            case 'd10':
+                $roll = rand(1, 10);
+                break;
+            case 'd12':
+                $roll = rand(1, 12);
+                break;
+            case 'd20':
+                $roll = rand(1, 20);
+                break;
+            default:
+                $roll = "I'm afraid I require you to instruct me about the variety of die you need me to handle before I can assist you";
+                break;
+        }
 
-        $message .= "Most likely" . chr(10);
-
-        $this->sendMessage($message);
+        $this->sendMessage($roll, true);
     }
 
     protected function sendMessage($message, $parse_html = false) {
