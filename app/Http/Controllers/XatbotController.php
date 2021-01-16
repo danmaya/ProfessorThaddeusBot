@@ -55,6 +55,15 @@ class XatbotController extends Controller
             case '/help':
                 $this->showHelp();
                 break;
+            case '/compliment':
+                $this->showCompliment();
+                break;
+            case '/pet':
+                $this->showPet();
+                break;
+            case '/assistance':
+                $this->showAssistance($arg);
+                break;
             default:
                 break;
         }
@@ -65,6 +74,33 @@ class XatbotController extends Controller
         $message = "";
 
         $message .= "May I help you?" . chr(10);
+
+        $this->sendMessage($message);
+    }
+
+    public function showCompliment()
+    {
+        $message = "";
+
+        $message .= "My most sincere appreciation" . chr(10);
+
+        $this->sendMessage($message);
+    }
+
+    public function showPet()
+    {
+        $message = "";
+
+        $message .= "If that is what you need, please continue" . chr(10);
+
+        $this->sendMessage($message);
+    }
+
+    public function showAssistance()
+    {
+        $message = "";
+
+        $message .= "Most likely" . chr(10);
 
         $this->sendMessage($message);
     }
