@@ -182,7 +182,7 @@ class XatbotController extends Controller
 
         curl_close($curl);
 
-        $title = json_decode($response, true)["reults"]["title"];
+        $title = json_decode($response, true)["results"]["title"];
         $href = json_decode($response, true)["results"]["href"];
         $ingredients = json_decode($response, true)["results"]["ingredients"];
         $thumbnail = json_decode($response, true)["results"]["thumbnail"];
