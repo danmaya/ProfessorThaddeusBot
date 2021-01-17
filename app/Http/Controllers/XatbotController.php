@@ -162,12 +162,13 @@ class XatbotController extends Controller
 
     public function showDefinition($message = null)
     {
+        $word = $message;
         $message = "";
 
         $curl = curl_init();
 
         curl_setopt_array($curl, [
-            CURLOPT_URL => "https://wordsapiv1.p.rapidapi.com/words/incredible/definitions",
+            CURLOPT_URL => "https://wordsapiv1.p.rapidapi.com/words/" . $word . "/definitions",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_ENCODING => "",
