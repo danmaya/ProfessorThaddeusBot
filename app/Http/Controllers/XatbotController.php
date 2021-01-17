@@ -72,6 +72,10 @@ class XatbotController extends Controller
             case '/guidance@ProfessorThaddeusBot':
                 $this->showGuidance();
                 break;
+            case '/definition':
+            case '/definition@ProfessorThaddeusBot':
+                $this->showWords($arg);
+                break;
             case '/suera':
             case '/suera@ProfessorThaddeusBot':
                 $this->showSuera();
@@ -154,6 +158,39 @@ class XatbotController extends Controller
         $answer = $array[array_rand($array)] . chr(10);
 
         $this->sendMessage($answer);
+    }
+
+    public function showDefinition()
+    {
+        $message = "";
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, [
+            CURLOPT_URL => "https://wordsapiv1.p.rapidapi.com/words/incredible/definitions",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_HTTPHEADER => [
+                "x-rapidapi-host: wordsapiv1.p.rapidapi.com",
+                "x-rapidapi-key: 1eb6df4177msh2a0961fbaa2bbb5p1ea2e0jsn5d4ea6661c32"
+            ],
+        ]);
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+
+        $definition = json_decode($response, true)["definitions"][0]["definition"];
+        $partOfSpeech = json_decode($response, true)["definitions"][0]["partOfSpeech"];
+
+        $message .= $partOfSpeech . "\n" . $definition . chr(10);
+
+        $this->sendMessage($message);
     }
 
     public function showSuera()
