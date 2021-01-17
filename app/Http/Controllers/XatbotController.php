@@ -89,7 +89,7 @@ class XatbotController extends Controller
     {
         $message = "";
 
-        $message .= "Pleased to make your acquaintance.\n My name is Professor Thaddeus, I will be glad to assist you in matters of knowledge.\n These are my currently available services:\n /assistance - Inquires me about my available services\n /compliment - Presents your compliments to me for my services\n /pet - Caresses my plumage in order to please your needs\n /dice - Appeals me to roll a die from the ones available (D4, D6, D8, D10, D12 and D20)\n /guidance - Requests me guidance on a matter of your choice\n" . chr(10);
+        $message .= "Pleased to make your acquaintance.\nMy name is Professor Thaddeus, I will be glad to assist you in matters of knowledge.\nThese are my currently available services:\n/assistance - Inquires me about my available services\n/compliment - Presents your compliments to me for my services\n/pet - Caresses my plumage in order to please your needs\n/dice - Appeals me to roll a die from the ones available (D4, D6, D8, D10, D12 and D20)\n/guidance - Requests me guidance on a matter of your choice" . chr(10);
 
         $this->sendMessage($message);
     }
