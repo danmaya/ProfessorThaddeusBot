@@ -172,7 +172,7 @@ class XatbotController extends Controller
 
             $data = file_get_contents("http://www.recipepuppy.com/api/?i=" . $ingredient);
 
-            if (json_decode($data, true)["results"][0] != "") {
+            if (json_decode($data, true)["results"] != null) {
 
                 $title = json_decode($data, true)["results"][0]["title"];
                 $ingredients = json_decode($data, true)["results"][0]["ingredients"];
