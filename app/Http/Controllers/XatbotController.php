@@ -160,7 +160,7 @@ class XatbotController extends Controller
         $this->sendMessage($answer);
     }
 
-    public function showDefinition($word)
+    public function showDefinition($word = null)
     {
         $message = "";
 
