@@ -164,23 +164,29 @@ class XatbotController extends Controller
     {
         $message = "";
 
-        $data = file_get_contents("http://www.recipepuppy.com/api/?i=" . $ingredient);
+        if ($ingredient == null) {
 
-        if (json_decode($data, true)["status"] === "ok") {
-
-            $title = json_decode($data, true)["results"][0]["title"];
-            $ingredients = json_decode($data, true)["results"][0]["ingredients"];
-            $href = json_decode($data, true)["results"][0]["href"];
-
-            $message .= "<b>Name:</b> " . $title . "\n" . "<b>Ingredients:</b> " . $ingredients . "\n" . "<b>Link:</b> " . $href . chr(10);
+            $message .= "My apologies, but I require you to instruct me about the ingredient you need me to look recipes of before I can assist you.";
 
         } else {
 
-            $message .= "I am afraid to inform you that there does not seem to be any recipes with that ingredient, may I suggest you try with another one?" . chr(10);
+            $data = file_get_contents("http://www.recipepuppy.com/api/?i=" . $ingredient);
+
+            if (json_decode($data, true)["status"] === "ok") {
+
+                $title = json_decode($data, true)["results"][0]["title"];
+                $ingredients = json_decode($data, true)["results"][0]["ingredients"];
+                $href = json_decode($data, true)["results"][0]["href"];
+
+                $message .= "<b>Name:</b> " . $title . "\n" . "<b>Ingredients:</b> " . $ingredients . "\n" . "<b>Link:</b> " . $href . chr(10);
+
+            } else {
+
+                $message .= "My apologies, but there do not seem to be any recipes with that ingredient, may I suggest you try with another one?" . chr(10);
+
+            }
 
         }
-
-        
 
         $this->sendMessage($message, true);
     }
