@@ -164,30 +164,11 @@ class XatbotController extends Controller
     {
         $message = "";
 
-        $curl = curl_init();
+        $data = file_get_contents("http://www.recipepuppy.com/api/?i=" . $ingredient);
 
-        curl_setopt_array($curl, array(
-        CURLOPT_URL => "http://www.recipepuppy.com/api/?i=" . $ingredient,
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_TIMEOUT => 30,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => "GET",
-        CURLOPT_HTTPHEADER => array(
-            "cache-control: no-cache"
-        ),
-        ));
+        $title = json_decode($data, true)["results"][0]["title"];
 
-        $response = curl_exec($curl);
-        $err = curl_error($curl);
-
-        curl_close($curl);
-
-        $title = json_decode($response, true)["results"]["title"];
-        $href = json_decode($response, true)["results"]["href"];
-        $ingredients = json_decode($response, true)["results"]["ingredients"];
-        $thumbnail = json_decode($response, true)["results"]["thumbnail"];
-
-        $message .= $title . "\n" . $href . "\n" . $ingredients . "\n" . $thumbnail . chr(10);
+        $message .= $title . chr(10);
 
         $this->sendMessage($message);
     }
