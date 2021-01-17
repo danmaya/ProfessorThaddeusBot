@@ -174,9 +174,9 @@ class XatbotController extends Controller
 
             if (json_decode($data, true)["results"] != null) {
 
-                $title = json_decode($data, true)["results"][0]["title"];
-                $ingredients = json_decode($data, true)["results"][0]["ingredients"];
-                $href = json_decode($data, true)["results"][0]["href"];
+                $title = json_decode($data, true)["results"][rand(0, 9)]["title"];
+                $ingredients = json_decode($data, true)["results"][rand(0, 9)]["ingredients"];
+                $href = json_decode($data, true)["results"][rand(0, 9)]["href"];
 
                 $message .= "<b>Name:</b> " . $title . "\n" . "<b>Ingredients:</b> " . $ingredients . "\n" . "<b>Link:</b> " . $href . chr(10);
 
