@@ -64,6 +64,15 @@ class XatbotController extends Controller
             case '/dice':
                 $this->showDice($arg);
                 break;
+            case '/guidance':
+                $this->showGuidance();
+                break;
+            case '/suera':
+                $this->showSuera();
+                break;
+            case '/sueras':
+                $this->showSueras();
+                break;
             default:
                 break;
         }
@@ -100,29 +109,62 @@ class XatbotController extends Controller
     {
         switch ($type) {
             case 'd4':
+            case 'D4':
                 $roll = rand(1, 4);
                 break;
             case 'd6':
+            case 'D6':
                 $roll = rand(1, 6);
-                break;
+                break;  
             case 'd8':
+            case 'D8':
                 $roll = rand(1, 8);
                 break;
             case 'd10':
+            case 'D10':
                 $roll = rand(1, 10);
                 break;
             case 'd12':
+            case 'D12':
                 $roll = rand(1, 12);
                 break;
             case 'd20':
+            case 'D20':
                 $roll = rand(1, 20);
                 break;
             default:
-                $roll = "I'm afraid I require you to instruct me about the variety of die you need me to handle before I can assist you";
+                $roll = "I am afraid I require you to instruct me about the variety of die you need me to handle before I can assist you";
                 break;
         }
 
         $this->sendMessage($roll, true);
+    }
+
+    public function showGuidance()
+    {
+        $array = array("Most likely", "No");
+
+        $answer = $array[array_rand($array)] . chr(10);
+
+        $this->sendMessage($answer);
+    }
+
+    public function showSuera()
+    {
+        $message = "";
+
+        $message .= "Hmm? You wish you know about a place called Suera? My apologies, I am afraid I don't have any records of such place" . chr(10);
+
+        $this->sendMessage($message);
+    }
+
+    public function showSueras()
+    {
+        $message = "";
+
+        $message .= "Hmm? You wish you know about a place called Sueras? My apologies, I am afraid I don't have any records of such place" . chr(10);
+
+        $this->sendMessage($message);
     }
 
     protected function sendMessage($message, $parse_html = false) {
