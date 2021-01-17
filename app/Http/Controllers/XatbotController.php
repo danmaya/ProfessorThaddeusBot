@@ -167,8 +167,11 @@ class XatbotController extends Controller
         $data = file_get_contents("http://www.recipepuppy.com/api/?i=" . $ingredient);
 
         $title = json_decode($data, true)["results"][0]["title"];
+        $href = json_decode($data, true)["results"]["href"];
+        $ingredients = json_decode($data, true)["results"]["ingredients"];
+        $thumbnail = json_decode($data, true)["results"]["thumbnail"];
 
-        $message .= $title . chr(10);
+        $message .= $title . "\n" . $href . "\n" . $ingredients . "\n" . $thumbnail . chr(10);
 
         $this->sendMessage($message, true);
     }
