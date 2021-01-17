@@ -160,7 +160,7 @@ class XatbotController extends Controller
         $this->sendMessage($answer);
     }
 
-    public function showDefinition($message = null)
+    /*public function showDefinition($message = null)
     {
         $word = $message;
         $message = "";
@@ -192,7 +192,7 @@ class XatbotController extends Controller
         $message .= $partOfSpeech . "\n" . $definition . chr(10);
 
         $this->sendMessage($message);
-    }
+    }*/
 
     public function showSuera()
     {
