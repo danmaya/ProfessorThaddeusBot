@@ -93,14 +93,14 @@ class XatbotController extends Controller
     {
         $message = "";
 
-        $message .= "Pleased to make your acquaintance.\nMy name is Professor Thaddeus, I will be glad to assist you in matters of knowledge.\nThese are my currently available services:\n/assistance - Inquires me about my available services\n/compliment - Presents your compliments to me for my services\n/pet - Caresses my plumage in order to please your needs\n/dice - Appeals me to roll a die from the ones available (D4, D6, D8, D10, D12 and D20)\n/guidance - Requests me guidance on a matter of your choice" . chr(10);
+        $message .= "Pleased to make your acquaintance.\nMy name is Professor Thaddeus, I will be glad to assist you in matters of knowledge.\nThese are my currently available services:\n/assistance - Inquires me about my available services.\n/compliment - Presents your compliments to me for my services.\n/pet - Caresses my plumage in order to please your needs.\n/dice - Appeals me to roll a die from the ones available (D4, D6, D8, D10, D12 and D20).\n/guidance - Requests me guidance on a matter of your choice.\n/definition - Petitions Professor Thaddeus to inform you about the definition of a word." . chr(10);
 
         $this->sendMessage($message);
     }
 
     public function showCompliment()
     {
-        $array = array("My most sincere appreciation", "I am most grateful", "I am very much obliged", "My most sincere gratitude");
+        $array = array("My most sincere appreciation.", "I am most grateful.", "I am very much obliged.", "My most sincere gratitude.");
 
         $answer = $array[array_rand($array)] . chr(10);
 
@@ -109,7 +109,7 @@ class XatbotController extends Controller
 
     public function showPet()
     {
-        $array = array("If that is what you need, please continue", "Hoot-hoo-ahem, my apologies, I may have got carried away", "Curious, but please, proceed", "I could get accustomed to this");
+        $array = array("If that is what you need, please continue.", "Hoot-hoo-ahem, my apologies, I may have got carried away.", "Curious, but please, proceed.", "I could get accustomed to this.");
 
         $answer = $array[array_rand($array)] . chr(10);
 
@@ -144,7 +144,7 @@ class XatbotController extends Controller
                 $roll = rand(1, 20);
                 break;
             default:
-                $roll = "I am afraid I require you to instruct me about the variety of die you need me to handle before I can assist you";
+                $roll = "I am afraid I require you to instruct me about the variety of die you need me to handle before I can assist you.";
                 break;
         }
 
@@ -153,17 +153,16 @@ class XatbotController extends Controller
 
     public function showGuidance()
     {
-        $array = array("Most likely", "I don't think so", "I am not certain", "Without a doubt", "I think so", "I am certain", "I am doubtful", "Indeed");
+        $array = array("Most likely.", "I don't think so.", "I am not certain.", "Without a doubt.", "I think so.", "I am certain.", "I am doubtful.", "Indeed.");
 
         $answer = $array[array_rand($array)] . chr(10);
 
         $this->sendMessage($answer);
     }
 
-    public function showDefinition($word = null)
+    public function showDefinition($word)
     {
         $message = "";
-        $word = "";
 
         $curl = curl_init();
 
@@ -189,7 +188,7 @@ class XatbotController extends Controller
         $definition = json_decode($response, true)["definitions"][0]["definition"];
         $partOfSpeech = json_decode($response, true)["definitions"][0]["partOfSpeech"];
 
-        $message .= $partOfSpeech . "\n" . $definition . chr(10);
+        $message .= $partOfSpeech . "\n" . $definition . "." . chr(10);
 
         $this->sendMessage($message);
     }
@@ -198,7 +197,7 @@ class XatbotController extends Controller
     {
         $message = "";
 
-        $message .= "Hmm? You wish you know about a place called Suera? My apologies, I am afraid I don't have any records of such place" . chr(10);
+        $message .= "Hmm? You wish you know about a place called Suera? My apologies, I am afraid I don't have any records of such place." . chr(10);
 
         $this->sendMessage($message);
     }
@@ -207,7 +206,7 @@ class XatbotController extends Controller
     {
         $message = "";
 
-        $message .= "Hmm? You wish you know about a place called Sueras? My apologies, I am afraid I don't have any records of such place" . chr(10);
+        $message .= "Hmm? You wish you know about a place called Sueras? My apologies, I am afraid I don't have any records of such place." . chr(10);
 
         $this->sendMessage($message);
     }
