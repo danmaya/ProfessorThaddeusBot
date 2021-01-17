@@ -109,7 +109,7 @@ class XatbotController extends Controller
 
     public function showPet()
     {
-        $array = array("If that is what you need, please continue.", "<i>Hoot-hoo-</i>ahem, my apologies, I may have got carried away.", "Curious, but please, proceed.", "I could get accustomed to this.");
+        $array = array("If that is what you need, please continue.", "Hoot-hoo-ahem, my apologies, I may have got carried away.", "Curious, but please, proceed.", "I could get accustomed to this.");
 
         $answer = $array[array_rand($array)] . chr(10);
 
