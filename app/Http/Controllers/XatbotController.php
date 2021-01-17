@@ -170,7 +170,7 @@ class XatbotController extends Controller
 
         $message .= $title . chr(10);
 
-        $this->sendMessage($message);
+        $this->sendMessage($message, true);
     }
 
     public function showSuera()
