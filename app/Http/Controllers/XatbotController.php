@@ -142,7 +142,7 @@ class XatbotController extends Controller
 
     public function showGuidance()
     {
-        $array = array("Most likely", "No");
+        $array = array("Most likely", "I don't think so", "I am not certain", "Without a doubt", "I think so", "I am certain", "I am doubtful", "Indeed");
 
         $answer = $array[array_rand($array)] . chr(10);
 
