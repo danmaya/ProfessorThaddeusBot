@@ -72,9 +72,9 @@ class XatbotController extends Controller
             case '/guidance@ProfessorThaddeusBot':
                 $this->showGuidance();
                 break;
-            case '/definition':
-            case '/definition@ProfessorThaddeusBot':
-                $this->showWords($arg);
+            case '/recipes':
+            case '/recipes@ProfessorThaddeusBot':
+                $this->showRecipes($arg);
                 break;
             case '/suera':
             case '/suera@ProfessorThaddeusBot':
@@ -160,35 +160,34 @@ class XatbotController extends Controller
         $this->sendMessage($answer);
     }
 
-    public function showDefinition($word = null)
+    public function showRecipes($ingredient = null)
     {
         $message = "";
 
         $curl = curl_init();
 
-        curl_setopt_array($curl, [
-            CURLOPT_URL => "https://wordsapiv1.p.rapidapi.com/words/" . $word . "/definitions",
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_ENCODING => "",
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 30,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => "GET",
-            CURLOPT_HTTPHEADER => [
-                "x-rapidapi-host: wordsapiv1.p.rapidapi.com",
-                "x-rapidapi-key: 1eb6df4177msh2a0961fbaa2bbb5p1ea2e0jsn5d4ea6661c32"
-            ],
-        ]);
+        curl_setopt_array($curl, array(
+        CURLOPT_URL => "http://www.recipepuppy.com/api/?i=" . $ingredient,
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_TIMEOUT => 30,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => "GET",
+        CURLOPT_HTTPHEADER => array(
+            "cache-control: no-cache"
+        ),
+        ));
 
         $response = curl_exec($curl);
+        $err = curl_error($curl);
 
         curl_close($curl);
 
-        $definition = json_decode($response, true)["definitions"][0]["definition"];
-        $partOfSpeech = json_decode($response, true)["definitions"][0]["partOfSpeech"];
+        $title = json_decode($response, true)["reults"][0]["title"];
+        $href = json_decode($response, true)["results"][0]["href"];
+        $ingredients = json_decode($response, true)["results"][0]["ingredients"];
+        $thumbnail = json_decode($response, true)["results"][0]["thumbnail"];
 
-        $message .= $partOfSpeech . "\n" . $definition . "." . chr(10);
+        $message .= $title . "\n" . $href . "\n" . $ingredients . "\n" . $thumbnail . chr(10);
 
         $this->sendMessage($message);
     }
