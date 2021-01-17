@@ -96,20 +96,20 @@ class XatbotController extends Controller
 
     public function showCompliment()
     {
-        $message = "";
+        $array = array("My most sincere appreciation", "I am most grateful", "I am very much obliged", "My most sincere gratitude");
 
-        $message .= "My most sincere appreciation" . chr(10);
+        $answer = $array[array_rand($array)] . chr(10);
 
-        $this->sendMessage($message);
+        $this->sendMessage($answer);
     }
 
     public function showPet()
     {
-        $message = "";
+        $array = array("If that is what you need, please continue", "Hoot-hoo-ahem, my apologies, I may have got carried away", "Curious, but please, proceed", "I could get accustomed to this");
 
-        $message .= "If that is what you need, please continue" . chr(10);
+        $answer = $array[array_rand($array)] . chr(10);
 
-        $this->sendMessage($message);
+        $this->sendMessage($answer);
     }
 
     public function showDice($type = null)
