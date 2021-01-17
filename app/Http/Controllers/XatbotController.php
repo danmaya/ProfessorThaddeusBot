@@ -109,7 +109,7 @@ class XatbotController extends Controller
 
     public function showPet()
     {
-        $array = array("If that is what you need, please continue.", "Hoot-hoo-ahem, my apologies, I may have got carried away.", "Curious, but please, proceed.", "I could get accustomed to this.");
+        $array = array("If that is what you need, please continue.", "<i>Hoot-hoo-</i>ahem, my apologies, I may have got carried away.", "Curious, but please, proceed.", "I could get accustomed to this.");
 
         $answer = $array[array_rand($array)] . chr(10);
 
@@ -166,11 +166,21 @@ class XatbotController extends Controller
 
         $data = file_get_contents("http://www.recipepuppy.com/api/?i=" . $ingredient);
 
-        $title = json_decode($data, true)["results"][0]["title"];
-        $ingredients = json_decode($data, true)["results"][0]["ingredients"];
-        $href = json_decode($data, true)["results"][0]["href"];
+        if (json_decode($data, true)["status"] === "ok") {
 
-        $message .= "<b>Name:</b> " . $title . "\n" . "<b>Ingredients:</b> " . $ingredients . "\n" . "<b>Link:</b> " . $href . chr(10);
+            $title = json_decode($data, true)["results"][0]["title"];
+            $ingredients = json_decode($data, true)["results"][0]["ingredients"];
+            $href = json_decode($data, true)["results"][0]["href"];
+
+            $message .= "<b>Name:</b> " . $title . "\n" . "<b>Ingredients:</b> " . $ingredients . "\n" . "<b>Link:</b> " . $href . chr(10);
+
+        } else {
+
+            $message .= "I am afraid to inform you that there does not seem to be any recipes with that ingredient, may I suggest you try with another one?" . chr(10);
+
+        }
+
+        
 
         $this->sendMessage($message, true);
     }
