@@ -53,24 +53,31 @@ class XatbotController extends Controller
 
         switch ($cmd) {
             case '/assistance':
+            case '/assistance@ProfessorThaddeusBot':
                 $this->showAssistance();
                 break;
             case '/compliment':
+            case '/compliment@ProfessorThaddeusBot':
                 $this->showCompliment();
                 break;
             case '/pet':
+            case '/pet@ProfessorThaddeusBot':
                 $this->showPet();
                 break;
             case '/dice':
+            case '/dice@ProfessorThaddeusBot':
                 $this->showDice($arg);
                 break;
             case '/guidance':
+            case '/guidance@ProfessorThaddeusBot':
                 $this->showGuidance();
                 break;
             case '/suera':
+            case '/suera@ProfessorThaddeusBot':
                 $this->showSuera();
                 break;
             case '/sueras':
+            case '/sueras@ProfessorThaddeusBot':
                 $this->showSueras();
                 break;
             default:
